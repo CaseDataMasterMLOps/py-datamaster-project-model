@@ -3,9 +3,13 @@ from sklearn.linear_model import LinearRegression
 import pickle
 
 colunas = ['tamanho', 'ano', 'garagem']
-modelo = pickle.load(open('modelo.sav', 'rb'))
+modelo = pickle.load(open('models/modelo.sav', 'rb'))
 
 app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "Minha primeira API."
 
 @app.route('/cotacao/', methods=['POST'])
 def cotacao():
@@ -15,4 +19,5 @@ def cotacao():
 
     return jsonify(preco=preco[0])
 
-app.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0')
